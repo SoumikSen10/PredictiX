@@ -1,10 +1,10 @@
 import React from "react";
 import Card from "../components/Card";
-import heartImage from "../../assets/heart.png";
-import lungImage from "../../assets/lung.png";
-import diabetesImage from "../../assets/diabetes.png";
-import breastImage from "../../assets/breast.png";
-import "../../App.css";
+import heartImage from "../assets/heart.png";
+import lungImage from "../assets/lung.png";
+import diabetesImage from "../assets/diabetes.png";
+import breastImage from "../assets/breast.png";
+import "../App.css";
 
 function Predictors() {
   return (

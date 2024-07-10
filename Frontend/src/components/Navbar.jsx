@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../../assets/PredictiX_main_logo.png";
+import logo from "../assets/PredictiX_main_logo.png";
 
 function Navbar() {
   return (
