@@ -6,9 +6,31 @@ import { spawn } from "child_process";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
 
+import path from "path";
+import fs from "fs";
+
+// Set up multer for file uploads
+
 // Get the directory path of the current ES module file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+//------------------------------------
+
+import multer from "multer";
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "../../uploads"));
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+export { upload };
 
 // Define the relative path to the heartpredict.py script
 const heartPath = resolve(
@@ -147,7 +169,59 @@ const diabetespred = asyncHandler(async (req, res) => {
   }
 });
 
-const lungpred = asyncHandler(async (req, res) => {});
+const lungpred = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    console.error("Multer did not process the file");
+    throw new ApiError(400, "No image file uploaded");
+  }
+
+  const filePath = path.resolve(
+    __dirname,
+    "..",
+    "..",
+    "uploads",
+    req.file.filename
+  );
+  console.log("Resolved file path:", filePath);
+
+  if (!fs.existsSync(filePath)) {
+    throw new ApiError(404, "Uploaded file not found");
+  }
+
+  const pythonProcess = spawn("python", [
+    path.resolve(__dirname, "../../../ML/Lung Cancer Prediction/predict.py"),
+    filePath,
+  ]);
+
+  let predictionData = "";
+  let errorOccurred = false;
+
+  pythonProcess.stdout.on("data", (data) => {
+    predictionData += data.toString();
+  });
+
+  pythonProcess.stderr.on("data", (data) => {
+    console.error(`Error: ${data}`);
+    errorOccurred = true;
+    res.status(500).json({ error: "Prediction error" });
+  });
+
+  pythonProcess.on("close", (code) => {
+    if (code === 0 && !errorOccurred) {
+      res.status(200).json({ prediction: predictionData.trim() });
+    } else if (!errorOccurred) {
+      res.status(500).json({ error: "Prediction error" });
+    }
+
+    // Always delete the file after the prediction process
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error("Error deleting file:", err);
+      }
+    });
+  });
+});
+
 const breastpred = asyncHandler(async (req, res) => {});
 
 export { heartpred, diabetespred, lungpred, breastpred };
