@@ -1,7 +1,3 @@
-# Mount Google Drive to access dataset files
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
-
 # Define paths to the training, validation, and test datasets
 train_folder = './dataset/train'
 test_folder = './dataset/test'
@@ -9,9 +5,9 @@ validate_folder = './dataset/valid'
 
 # Define paths to the specific classes within the dataset
 normal_folder = '/normal'
-adenocarcinoma_folder = '/adenocarcinoma_left.lower.lobe_T2_N0_M0_Ib'
-large_cell_carcinoma_folder = '/large.cell.carcinoma_left.hilum_T2_N2_M0_IIIa'
-squamous_cell_carcinoma_folder = '/squamous.cell.carcinoma_left.hilum_T1_N2_M0_IIIa'
+adenocarcinoma_folder = '/adenocarcinoma'
+large_cell_carcinoma_folder = '/large.cell.carcinoma'
+squamous_cell_carcinoma_folder = '/squamous.cell.carcinoma'
 
 # Import necessary libraries
 import warnings
@@ -61,7 +57,7 @@ train_generator = train_datagen.flow_from_directory(
 
 # Create the validation data generator
 validation_generator = test_datagen.flow_from_directory(
-    test_folder,
+    validate_folder,
     target_size=IMAGE_SIZE,
     batch_size=batch_size,
     color_mode="rgb",
@@ -129,7 +125,7 @@ display_training_curves(history.history['loss'], history.history['val_loss'], 'l
 display_training_curves(history.history['accuracy'], history.history['val_accuracy'], 'accuracy', 212)
 
 # Save the trained model
-model.save('/content/drive/MyDrive/dataset/trained_lung_cancer_model.h5')
+model.save('./trained_lung_cancer_model.h5')
 
 # Function to load and preprocess an image for prediction
 from tensorflow.keras.preprocessing import image
@@ -143,7 +139,7 @@ def load_and_preprocess_image(img_path, target_size):
     return img_array
 
 # Load, preprocess, and predict the class of an image
-img_path = '/content/sq.png'
+img_path = '/mnt/data/image.png'  # Use the uploaded image path
 img = load_and_preprocess_image(img_path, IMAGE_SIZE)
 predictions = model.predict(img)
 predicted_class = np.argmax(predictions[0])
@@ -159,35 +155,15 @@ plt.axis('off')
 plt.show()
 
 # Repeat the process for additional images
-img_path = '/content/ad3.png'
-img = load_and_preprocess_image(img_path, IMAGE_SIZE)
-predictions = model.predict(img)
-predicted_class = np.argmax(predictions[0])
-predicted_label = class_labels[predicted_class]
-print(f"The image belongs to class: {predicted_label}")
-plt.imshow(image.load_img(img_path, target_size=IMAGE_SIZE))
-plt.title(f"Predicted: {predicted_label}")
-plt.axis('off')
-plt.show()
-
-img_path = '/content/l3.png'
-img = load_and_preprocess_image(img_path, IMAGE_SIZE)
-predictions = model.predict(img)
-predicted_class = np.argmax(predictions[0])
-predicted_label = class_labels[predicted_class]
-print(f"The image belongs to class: {predicted_label}")
-plt.imshow(image.load_img(img_path, target_size=IMAGE_SIZE))
-plt.title(f"Predicted: {predicted_label}")
-plt.axis('off')
-plt.show()
-
-img_path = '/content/n8.jpg'
-img = load_and_preprocess_image(img_path, IMAGE_SIZE)
-predictions = model.predict(img)
-predicted_class = np.argmax(predictions[0])
-predicted_label = class_labels[predicted_class]
-print(f"The image belongs to class: {predicted_label}")
-plt.imshow(image.load_img(img_path, target_size=IMAGE_SIZE))
-plt.title(f"Predicted: {predicted_label}")
-plt.axis('off')
-plt.show()
+# You can update these paths accordingly or add new image paths for predictions
+img_paths = ['/content/ad3.png', '/content/l3.png', '/content/n8.jpg']
+for img_path in img_paths:
+    img = load_and_preprocess_image(img_path, IMAGE_SIZE)
+    predictions = model.predict(img)
+    predicted_class = np.argmax(predictions[0])
+    predicted_label = class_labels[predicted_class]
+    print(f"The image belongs to class: {predicted_label}")
+    plt.imshow(image.load_img(img_path, target_size=IMAGE_SIZE))
+    plt.title(f"Predicted: {predicted_label}")
+    plt.axis('off')
+    plt.show()
