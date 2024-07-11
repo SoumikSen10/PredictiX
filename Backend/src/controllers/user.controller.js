@@ -261,6 +261,33 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "Account details updated successfully"));
 });
 
+const getProfile = asyncHandler(async (req, res) => {
+  const token = req.cookies.accessToken; // Ensure you are getting accessToken from cookies
+  console.log(token); // Check if token is retrieved correctly for debugging
+
+  if (!token) {
+    throw new ApiError(401, "Access Token is missing");
+  }
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+    const user = await User.findById(decodedToken._id).select(
+      "-password -refreshToken"
+    );
+
+    if (!user) {
+      throw new ApiError(404, "User not found");
+    }
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, user, "Profile fetched successfully"));
+  } catch (error) {
+    throw new ApiError(401, "Invalid token");
+  }
+});
+
 export {
   registerUser,
   loginUser,
@@ -269,4 +296,5 @@ export {
   changeCurrentPassword,
   getCurrentUser,
   updateAccountDetails,
+  getProfile,
 };

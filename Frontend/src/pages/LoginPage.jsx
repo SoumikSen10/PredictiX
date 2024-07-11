@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import "../App.css";
 import LoginVector from "../assets/LoginVector.png";
 import { UserContext } from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Import Link from react-router-dom
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -31,7 +31,6 @@ function LoginPage() {
       navigate("/");
     } catch (error) {
       console.error("Error:", error);
-      console.log(userInfo);
       alert("Wrong credentials");
     }
   }
@@ -66,7 +65,7 @@ function LoginPage() {
           </form>
           <div className="login-footer">
             <p>
-              Don't have an account? <a href="/signup">Sign up</a>
+              Don't have an account? <Link to="/signup">Sign up</Link>
             </p>
           </div>
         </div>
