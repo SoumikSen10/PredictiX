@@ -17,6 +17,7 @@ function SignupPage() {
 
   async function signup(e) {
     e.preventDefault();
+    console.log(fullname);
     console.log(username);
     console.log(password);
     const response = await fetch(
