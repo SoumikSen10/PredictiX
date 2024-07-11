@@ -222,6 +222,60 @@ const lungpred = asyncHandler(async (req, res) => {
   });
 });
 
-const breastpred = asyncHandler(async (req, res) => {});
+const breastpred = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    console.error("Multer did not process the file");
+    throw new ApiError(400, "No image file uploaded");
+  }
+
+  const filePath = path.resolve(
+    __dirname,
+    "..",
+    "..",
+    "uploads",
+    req.file.filename
+  );
+  console.log("Resolved file path:", filePath);
+
+  if (!fs.existsSync(filePath)) {
+    throw new ApiError(404, "Uploaded file not found");
+  }
+
+  const pythonProcess = spawn("python", [
+    path.resolve(
+      __dirname,
+      "../../../ML/Breast Cancer Prediction/breast_cancer_prediction.py"
+    ),
+    filePath,
+  ]);
+
+  let predictionData = "";
+  let errorOccurred = false;
+
+  pythonProcess.stdout.on("data", (data) => {
+    predictionData += data.toString();
+  });
+
+  pythonProcess.stderr.on("data", (data) => {
+    console.error(`Error: ${data}`);
+    errorOccurred = true;
+    res.status(500).json({ error: "Prediction error" });
+  });
+
+  pythonProcess.on("close", (code) => {
+    if (code === 0 && !errorOccurred) {
+      res.status(200).json({ prediction: predictionData.trim() });
+    } else if (!errorOccurred) {
+      res.status(500).json({ error: "Prediction error" });
+    }
+
+    // Always delete the file after the prediction process
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error("Error deleting file:", err);
+      }
+    });
+  });
+});
 
 export { heartpred, diabetespred, lungpred, breastpred };
