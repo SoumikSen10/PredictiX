@@ -48,14 +48,21 @@ const heartpred = asyncHandler(async (req, res) => {
   try {
     const { p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13 } = req.body;
 
+    // Condition check for p2: If male (assuming 1 for male and 0 for female)
+    const transformedP2 = isNaN(p2) ? (p2.toLowerCase() === "male" ? 1 : 0) : p2;
+
+    // Condition check for p6: If yes (assuming 1 for yes and 0 for no)
+    const transformedP6 = isNaN(p6) ? (p6.toLowerCase() === "yes" ? 1 : 0) : p6;
+
+
     const python = spawn("python", [
       heartPath,
       p1,
-      p2,
+      transformedP2.toString(),
       p3,
       p4,
       p5,
-      p6,
+      transformedP6.toString(),
       p7,
       p8,
       p9,
@@ -101,6 +108,8 @@ const heartpred = asyncHandler(async (req, res) => {
     res.status(500).json({ message: "Failed to predict" });
   }
 });
+
+
 
 const diabetespred = asyncHandler(async (req, res) => {
   try {
