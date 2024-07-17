@@ -3,9 +3,7 @@ import sys
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-import tensorflow as tf
 import contextlib
-import matplotlib.pyplot as plt
 
 # Suppress TensorFlow INFO and WARNING logs
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -16,7 +14,11 @@ if not os.path.exists(model_path):
     print(f"Model file not found at {model_path}")
     sys.exit(1)
 
-model = load_model(model_path)
+try:
+    model = load_model(model_path)
+except Exception as e:
+    print(f"Error loading model: {e}")
+    sys.exit(1)
 
 IMAGE_SIZE = (256, 256)  # Updated image size
 class_labels = ['squamous cell carcinoma', 'large cell carcinoma', 'normal', 'adenocarcinoma']
@@ -59,5 +61,9 @@ if __name__ == "__main__":
         sys.exit(1)
 
     img_path = sys.argv[1]
+    if not os.path.exists(img_path):
+        print(f"Image file not found at {img_path}")
+        sys.exit(1)
+
     predicted_label = predict_image_class(model, img_path, IMAGE_SIZE)
     print(predicted_label)
