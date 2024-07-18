@@ -45,12 +45,11 @@ def predict_image_class(model, img_path, target_size):
         predicted_class = np.argmax(predictions[0])
         predicted_label = class_labels[predicted_class]
         
-        if predicted_label == 'normal':
-            cancerous_label = 'non-cancerous'
+        if (predicted_label == 'normal'):
+            return 'non-cancerous'
         else:
-            cancerous_label = 'cancerous'
+            return 'cancerous'
         
-        return cancerous_label
     except Exception as e:
         print(f"Error in predicting image class: {e}")
         sys.exit(1)

@@ -248,6 +248,7 @@ const lungpred = asyncHandler(async (req, res) => {
   }
 });
 
+
 const breastpred = asyncHandler(async (req, res) => {
   if (!req.file) {
     console.error("Multer did not process the file");
