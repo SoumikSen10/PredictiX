@@ -56,6 +56,9 @@ body {
 }
 
 .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0.2rem 1.25rem; /* 10px 20px */
   border: none;
   border-radius: 0.3125rem; /* 5px */
@@ -63,6 +66,8 @@ body {
   font-weight: bold;
   text-decoration: none;
   font-size: 0.9rem; /* 14.4px */
+  height: 40px;
+  margin-top: -10px;
 }
 
 .btn-login {
@@ -374,6 +379,12 @@ body {
     flex: 1 1 100%; /* One card per row on smaller screens */
     max-width: 100%; /* Full width */
   }
+}
+
+.pos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Login */

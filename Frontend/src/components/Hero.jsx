@@ -12,7 +12,9 @@ function Hero() {
           for Accurate Multi-Disease Detection and Prevention.
         </p>
         <Link to="/predictors">
-          <button className="btn btn-primary">Diagnose Now</button>
+          <div className="pos">
+            <button className="btn btn-primary">Diagnose Now</button>
+          </div>
         </Link>
       </div>
       <div className="hero-image">
