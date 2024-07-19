@@ -95,7 +95,7 @@ body {
 }
 
 .btn-logout {
-  background-color: #f44336;
+  background-color: #b52218;
   color: white;
   border-radius: 2.188rem; /* 35px */
   padding: 0.2rem 1.25rem; /* 10px 20px */
@@ -108,7 +108,7 @@ body {
 }
 
 .btn-logout:hover {
-  background-color: #d32f2f;
+  background-color: #611010;
   transform: scale(1.02);
 }
 
