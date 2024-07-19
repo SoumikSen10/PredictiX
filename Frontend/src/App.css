@@ -372,6 +372,11 @@ body {
   .card {
     flex: 1 1 calc(50% - 20px); /* Two cards per row with smaller gap */
   }
+  .pos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media (max-width: 576px) {
@@ -379,12 +384,11 @@ body {
     flex: 1 1 100%; /* One card per row on smaller screens */
     max-width: 100%; /* Full width */
   }
-}
-
-.pos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .pos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 /* Login */
