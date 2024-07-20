@@ -21,15 +21,19 @@ body {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* 0 2px 4px */
 }
 
+.navbar-logo {
+  flex: 1;
+}
+
 .navbar-logo img {
   height: 3.75rem; /* 55px */
-  margin-left: 1.875rem; /* 30px */
+  margin-left: 1.875rem;
 }
 
 .navbar-links {
   display: flex;
   gap: 3.5rem; /* 20px */
-  position: absolute;
+  position: relative;
   right: 5rem; /* 80px */
 }
 

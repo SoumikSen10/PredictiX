@@ -86,7 +86,17 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="navbar-logo">
         <img src={logo} alt="PredictiX" />
       </div>
