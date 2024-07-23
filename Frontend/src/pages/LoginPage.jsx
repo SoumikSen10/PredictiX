@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dotenv from "dotenv";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -13,7 +14,6 @@ function LoginPage() {
 
   const { setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
-
   async function login(e) {
     e.preventDefault();
 
@@ -31,12 +31,15 @@ function LoginPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/v1/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-        credentials: "include",
-      });
+      const response = await fetch(
+        `http://localhost:${import.meta.env._PORT}/api/v1/users/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, email, password }),
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         if (response.status === 401) {
