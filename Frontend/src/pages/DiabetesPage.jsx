@@ -5,6 +5,8 @@ import { FiUpload } from "react-icons/fi";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
+import dotenv from "dotenv";
+
 const DiabetesPage = () => {
   const [formData, setFormData] = useState({
     pregnancies: "",
@@ -42,7 +44,7 @@ const DiabetesPage = () => {
 
       try {
         const response = await fetch(
-          "http://localhost:8080/api/pdf/diabetes-scraper",
+          `http://localhost:${import.meta.env._PORT}/api/pdf/diabetes-scraper`,
           {
             method: "POST",
             body: formData,
@@ -83,7 +85,9 @@ const DiabetesPage = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/predict/diabetes-pred",
+        `http://localhost:${
+          import.meta.env._PORT
+        }/api/v1/predict/diabetes-pred`,
         {
           method: "POST",
           headers: {
