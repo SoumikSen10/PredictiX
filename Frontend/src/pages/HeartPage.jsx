@@ -47,7 +47,9 @@ const HeartPage = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:${import.meta.env._PORT}/api/pdf/heart-scraper`,
+          `${import.meta.env._BACKEND}:${
+            import.meta.env._PORT
+          }/api/pdf/heart-scraper`,
           {
             method: "POST",
             body: formData,
@@ -95,7 +97,9 @@ const HeartPage = () => {
     setLoading(true); // Start loading spinner
     try {
       const response = await fetch(
-        `http://localhost:${import.meta.env._PORT}/api/v1/predict/heart-pred`,
+        `${import.meta.env._BACKEND}:${
+          import.meta.env._PORT
+        }/api/v1/predict/heart-pred`,
         {
           method: "POST",
           headers: {

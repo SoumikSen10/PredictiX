@@ -26,6 +26,11 @@ app.use(
   })
 );
 
+
+app.use(cors({
+  origin:process.env.VERCEL // vercel link
+}));
+
 // Configurations for different types of data acceptance
 // Limiting json data acceptance
 app.use(express.json());

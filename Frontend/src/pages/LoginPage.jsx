@@ -32,7 +32,9 @@ function LoginPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:${import.meta.env._PORT}/api/v1/users/login`,
+        `${import.meta.env._BACKEND}:${
+          import.meta.env._PORT
+        }/api/v1/users/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
