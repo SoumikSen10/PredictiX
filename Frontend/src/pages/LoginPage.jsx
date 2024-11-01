@@ -31,18 +31,14 @@ function LoginPage() {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND}/api/v1/users/login`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`/api/v1/users/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include",
+      });
 
-      const apiUrl = `${import.meta.env.VITE_BACKEND}/api/v1/users/login`; // Ensure VITE_BACKEND is correct
-      console.log("API URL:", apiUrl); // Debug to see if the URL is correct
+      console.log(response);
 
       if (!response.ok) {
         if (response.status === 401) {
