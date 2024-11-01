@@ -54,7 +54,7 @@ function SignupPage() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND}/api/v1/users/register`,
+        `http://localhost:${import.meta.env._PORT}/api/v1/users/register`,
         {
           method: "POST",
           body: JSON.stringify({ fullname, username, email, password }),

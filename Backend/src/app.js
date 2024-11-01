@@ -26,12 +26,6 @@ app.use(
   })
 );
 
-
-app.use(cors({
-  origin:process.env.VERCEL, // vercel link
-  credentials:true,
-}));
-
 // Configurations for different types of data acceptance
 // Limiting json data acceptance
 app.use(express.json());
@@ -42,6 +36,6 @@ app.use(cookieParser());
 // Routes declaration
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/predict", predRouter);
-app.use("/api/pdf", pdfRouter);// Add this line to include the new PDF routes
+app.use("/api/pdf", pdfRouter); // Add this line to include the new PDF routes
 
 export { app };

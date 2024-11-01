@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import dotenv from "dotenv";
 
 function LoginPage() {
-  //const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,16 +32,14 @@ function LoginPage() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND}/api/v1/users/login`,
+        `http://localhost:${import.meta.env._PORT}/api/v1/users/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ username, email, password }),
           credentials: "include",
         }
       );
-
-      console.log(response);
 
       if (!response.ok) {
         if (response.status === 401) {
