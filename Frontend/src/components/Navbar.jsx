@@ -30,9 +30,7 @@ function Navbar() {
   const fetchProfile = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env._BACKEND}:${
-          import.meta.env._PORT
-        }/api/v1/users/profile`,
+        `${import.meta.env._BACKEND}/api/v1/users/profile`,
         {
           credentials: "include",
         }
@@ -52,9 +50,7 @@ function Navbar() {
   const logout = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env._BACKEND}:${
-          import.meta.env._PORT
-        }/api/v1/users/logout`,
+        `${import.meta.env._BACKEND}/api/v1/users/logout`,
         {
           credentials: "include",
           method: "POST",

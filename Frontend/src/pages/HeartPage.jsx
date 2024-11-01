@@ -97,9 +97,7 @@ const HeartPage = () => {
     setLoading(true); // Start loading spinner
     try {
       const response = await fetch(
-        `${import.meta.env._BACKEND}:${
-          import.meta.env._PORT
-        }/api/v1/predict/heart-pred`,
+        `${import.meta.env._BACKEND}/api/v1/predict/heart-pred`,
         {
           method: "POST",
           headers: {
