@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import dotenv from "dotenv";
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
+  //const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,7 +36,7 @@ function LoginPage() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, email, password }),
+          body: JSON.stringify({ email, password }),
           credentials: "include",
         }
       );
