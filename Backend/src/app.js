@@ -28,7 +28,8 @@ app.use(
 
 
 app.use(cors({
-  origin:process.env.VERCEL // vercel link
+  origin:process.env.VERCEL, // vercel link
+  credentials:true,
 }));
 
 // Configurations for different types of data acceptance
