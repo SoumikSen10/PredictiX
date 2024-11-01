@@ -41,6 +41,9 @@ function LoginPage() {
         }
       );
 
+      const apiUrl = `${import.meta.env.VITE_BACKEND}/api/v1/users/login`; // Ensure VITE_BACKEND is correct
+      console.log("API URL:", apiUrl); // Debug to see if the URL is correct
+
       if (!response.ok) {
         if (response.status === 401) {
           // Unauthorized error
