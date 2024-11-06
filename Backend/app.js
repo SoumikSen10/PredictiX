@@ -26,6 +26,13 @@ app.use(
   })
 );
 
+
+app.use(cors({
+  origin: 'https://predicti-x.vercel.app', // allow requests only from this origin
+  methods: 'GET,POST,PUT,DELETE', // specify allowed methods
+  credentials: true // if you need to send cookies or headers like Authorization
+}));
+
 // Configurations for different types of data acceptance
 // Limiting json data acceptance
 app.use(express.json());
