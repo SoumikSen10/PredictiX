@@ -32,7 +32,7 @@ function LoginPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:${import.meta.env._PORT}/api/v1/users/login`,
+        `http://predictix.ap-south-1.elasticbeanstalk.com/api/v1/users/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

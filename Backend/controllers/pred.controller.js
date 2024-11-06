@@ -21,7 +21,7 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../../uploads"));
+    cb(null, path.join(__dirname, "../uploads"));
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
@@ -35,13 +35,13 @@ export { upload };
 // Define the relative path to the heartpredict.py script
 const heartPath = resolve(
   __dirname,
-  "../../../ML/Heart Disease Prediction/heartpredict.py"
+  "../ML/Heart Disease Prediction/heartpredict.py"
 );
 
 // Define the relative path to the diabetespredict.py script
 const diabetesPath = resolve(
   __dirname,
-  "../../../ML/Diabetes Prediction/diabetespredict.py"
+  "../ML/Diabetes Prediction/diabetespredict.py"
 );
 
 const heartpred = asyncHandler(async (req, res) => {
@@ -189,7 +189,6 @@ const lungpred = asyncHandler(async (req, res) => {
     const filePath = path.resolve(
       __dirname,
       "..",
-      "..",
       "uploads",
       req.file.filename
     );
@@ -200,7 +199,7 @@ const lungpred = asyncHandler(async (req, res) => {
     }
 
     const pythonProcess = spawn("python", [
-      path.resolve(__dirname, "../../../ML/Lung Cancer Prediction/predict.py"),
+      path.resolve(__dirname, "../ML/Lung Cancer Prediction/predict.py"),
       filePath,
     ]);
 
@@ -248,20 +247,13 @@ const lungpred = asyncHandler(async (req, res) => {
   }
 });
 
-
 const breastpred = asyncHandler(async (req, res) => {
   if (!req.file) {
     console.error("Multer did not process the file");
     throw new ApiError(400, "No image file uploaded");
   }
 
-  const filePath = path.resolve(
-    __dirname,
-    "..",
-    "..",
-    "uploads",
-    req.file.filename
-  );
+  const filePath = path.resolve(__dirname, "..", "uploads", req.file.filename);
   console.log("Resolved file path:", filePath);
 
   if (!fs.existsSync(filePath)) {
@@ -271,7 +263,7 @@ const breastpred = asyncHandler(async (req, res) => {
   const pythonProcess = spawn("python", [
     path.resolve(
       __dirname,
-      "../../../ML/Breast Cancer Prediction/breast_cancer_prediction.py"
+      "../ML/Breast Cancer Prediction/breast_cancer_prediction.py"
     ),
     filePath,
   ]);

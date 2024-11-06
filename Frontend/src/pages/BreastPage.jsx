@@ -56,7 +56,7 @@ const BreastPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:${import.meta.env._PORT}/api/v1/predict/breast-pred`,
+        `http://predictix.ap-south-1.elasticbeanstalk.com/api/v1/predict/breast-pred`,
         {
           method: "POST",
           body: formDataToSend,

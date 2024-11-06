@@ -44,7 +44,7 @@ const DiabetesPage = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:${import.meta.env._PORT}/api/pdf/diabetes-scraper`,
+          `http://predictix.ap-south-1.elasticbeanstalk.com/api/pdf/diabetes-scraper`,
           {
             method: "POST",
             body: formData,
@@ -85,9 +85,7 @@ const DiabetesPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:${
-          import.meta.env._PORT
-        }/api/v1/predict/diabetes-pred`,
+        `http://predictix.ap-south-1.elasticbeanstalk.com/api/v1/predict/diabetes-pred`,
         {
           method: "POST",
           headers: {
