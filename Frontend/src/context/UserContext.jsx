@@ -9,7 +9,7 @@ export function UserContextProvider({ children }) {
     const fetchUserProfile = async () => {
       try {
         const response = await fetch(
-          "https://predicti-x.vercel.app/api/v1/users/profile",
+          "https://predictix-backend.vercel.app/api/v1/users/profile",
           {
             credentials: "include", // Sends cookies with the request
           }
