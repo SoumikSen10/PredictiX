@@ -69,6 +69,7 @@ function Navbar() {
       }
     } catch (error) {
       console.error("Logout failed with error:", error);
+      toast.error("Logout failed. Please try again.");
     }
   };
 
