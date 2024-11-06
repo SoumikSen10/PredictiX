@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa"; // Import FaTimes for the cross icon
 import logo from "../assets/PredictiX_main_logo.png";
@@ -29,12 +28,20 @@ function Navbar() {
 
   const fetchProfile = async () => {
     try {
+      // Use token from localStorage or cookies
+      const token = localStorage.getItem("authToken");
+
       const response = await fetch(
         `https://predictix-backend.vercel.app/api/v1/users/profile`,
         {
+          method: "GET",
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "", // Include token if available
+          },
           credentials: "include",
         }
       );
+
       if (response.ok) {
         const userData = await response.json();
         setUserInfo(userData);
@@ -58,6 +65,7 @@ function Navbar() {
       );
       if (response.ok) {
         setUserInfo(null);
+        localStorage.removeItem("authToken"); // Remove token on logout
         toast.success("You have been logged out successfully!", {
           autoClose: 2000,
         });

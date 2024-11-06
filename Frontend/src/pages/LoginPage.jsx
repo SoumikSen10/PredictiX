@@ -5,7 +5,6 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import dotenv from "dotenv";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -14,6 +13,7 @@ function LoginPage() {
 
   const { setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
+
   async function login(e) {
     e.preventDefault();
 
@@ -43,7 +43,6 @@ function LoginPage() {
 
       if (!response.ok) {
         if (response.status === 401) {
-          // Unauthorized error
           toast.error("Email or password does not match");
         } else {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -53,9 +52,14 @@ function LoginPage() {
 
       const userInfo = await response.json();
       setUserInfo(userInfo);
+
+      // Store the token (if any) in localStorage for future requests
+      if (userInfo?.token) {
+        localStorage.setItem("authToken", userInfo.token);
+      }
+
       toast.success("Login successful! Redirecting to homepage...");
 
-      // Delay navigation to show the toast for a few seconds
       setTimeout(() => {
         navigate("/");
       }, 3000); // 3 seconds delay
