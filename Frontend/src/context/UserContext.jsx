@@ -14,6 +14,7 @@ export function UserContextProvider({ children }) {
             credentials: "include", // Sends cookies with the request
           }
         );
+
         if (response.ok) {
           const userData = await response.json();
           setUserInfo(userData); // Set user info in context
