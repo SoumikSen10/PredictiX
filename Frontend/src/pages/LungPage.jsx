@@ -54,7 +54,7 @@ const LungPage = () => {
 
     try {
       const response = await fetch(
-        `http://predictix.ap-south-1.elasticbeanstalk.com/api/v1/predict/lung-pred`,
+        `https://predictix.onrender.com/api/v1/predict/lung-pred`,
         {
           method: "POST",
           body: formDataToSend,

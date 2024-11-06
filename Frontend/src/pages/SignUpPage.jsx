@@ -54,7 +54,7 @@ function SignupPage() {
 
     try {
       const response = await fetch(
-        `http://predictix.ap-south-1.elasticbeanstalk.com/api/v1/users/register`,
+        `https://predictix.onrender.com/api/v1/users/register`,
         {
           method: "POST",
           body: JSON.stringify({ fullname, username, email, password }),

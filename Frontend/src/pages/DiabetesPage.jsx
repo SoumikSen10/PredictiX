@@ -44,7 +44,7 @@ const DiabetesPage = () => {
 
       try {
         const response = await fetch(
-          `http://predictix.ap-south-1.elasticbeanstalk.com/api/pdf/diabetes-scraper`,
+          `https://predictix.onrender.com/api/pdf/diabetes-scraper`,
           {
             method: "POST",
             body: formData,
@@ -85,7 +85,7 @@ const DiabetesPage = () => {
 
     try {
       const response = await fetch(
-        `http://predictix.ap-south-1.elasticbeanstalk.com/api/v1/predict/diabetes-pred`,
+        `https://predictix.onrender.com/api/v1/predict/diabetes-pred`,
         {
           method: "POST",
           headers: {

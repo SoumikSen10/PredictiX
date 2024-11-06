@@ -47,7 +47,7 @@ const HeartPage = () => {
 
       try {
         const response = await fetch(
-          `http://predictix.ap-south-1.elasticbeanstalk.com/api/pdf/heart-scraper`,
+          `https://predictix.onrender.com/api/pdf/heart-scraper`,
           {
             method: "POST",
             body: formData,
@@ -95,7 +95,7 @@ const HeartPage = () => {
     setLoading(true); // Start loading spinner
     try {
       const response = await fetch(
-        `http://predictix.ap-south-1.elasticbeanstalk.com/api/v1/predict/heart-pred`,
+        `https://predictix.onrender.com/api/v1/predict/heart-pred`,
         {
           method: "POST",
           headers: {
