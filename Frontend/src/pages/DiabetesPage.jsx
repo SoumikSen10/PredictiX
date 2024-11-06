@@ -44,7 +44,7 @@ const DiabetesPage = () => {
 
       try {
         const response = await fetch(
-          `https://predictix.onrender.com/api/pdf/diabetes-scraper`,
+          `https://predictix-backend.vercel.app/api/pdf/diabetes-scraper`,
           {
             method: "POST",
             body: formData,
@@ -85,7 +85,7 @@ const DiabetesPage = () => {
 
     try {
       const response = await fetch(
-        `https://predictix.onrender.com/api/v1/predict/diabetes-pred`,
+        `https://predictix-backend.vercel.app/api/v1/predict/diabetes-pred`,
         {
           method: "POST",
           headers: {

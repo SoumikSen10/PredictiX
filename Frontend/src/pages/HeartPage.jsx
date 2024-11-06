@@ -47,7 +47,7 @@ const HeartPage = () => {
 
       try {
         const response = await fetch(
-          `https://predictix.onrender.com/api/pdf/heart-scraper`,
+          `https://predictix-backend.vercel.app/api/pdf/heart-scraper`,
           {
             method: "POST",
             body: formData,
@@ -95,7 +95,7 @@ const HeartPage = () => {
     setLoading(true); // Start loading spinner
     try {
       const response = await fetch(
-        `https://predictix.onrender.com/api/v1/predict/heart-pred`,
+        `https://predictix-backend.vercel.app/api/v1/predict/heart-pred`,
         {
           method: "POST",
           headers: {

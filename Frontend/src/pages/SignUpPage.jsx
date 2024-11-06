@@ -54,7 +54,7 @@ function SignupPage() {
 
     try {
       const response = await fetch(
-        `https://predictix.onrender.com/api/v1/users/register`,
+        `https://predictix-backend.vercel.app/api/v1/users/register`,
         {
           method: "POST",
           body: JSON.stringify({ fullname, username, email, password }),

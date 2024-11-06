@@ -30,7 +30,7 @@ function Navbar() {
   const fetchProfile = async () => {
     try {
       const response = await fetch(
-        `https://predictix.onrender.com/api/v1/users/profile`,
+        `https://predictix-backend.vercel.app/api/v1/users/profile`,
         {
           credentials: "include",
         }
@@ -50,7 +50,7 @@ function Navbar() {
   const logout = async () => {
     try {
       const response = await fetch(
-        `https://predictix.onrender.com/api/v1/users/logout`,
+        `https://predictix-backend.vercel.app/api/v1/users/logout`,
         {
           credentials: "include",
           method: "POST",

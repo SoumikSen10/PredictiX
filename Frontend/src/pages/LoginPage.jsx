@@ -32,7 +32,7 @@ function LoginPage() {
 
     try {
       const response = await fetch(
-        `https://predictix.onrender.com/api/v1/users/login`,
+        `https://predictix-backend.vercel.app/api/v1/users/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

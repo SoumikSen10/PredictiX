@@ -54,7 +54,7 @@ const LungPage = () => {
 
     try {
       const response = await fetch(
-        `https://predictix.onrender.com/api/v1/predict/lung-pred`,
+        `https://predictix-backend.vercel.app/api/v1/predict/lung-pred`,
         {
           method: "POST",
           body: formDataToSend,
